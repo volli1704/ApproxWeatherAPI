@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    volumes:
+      - approxWeather:/var/opt/mssql/data
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_PASSWORD}
+    ports:
+      - 1433:1433 # ONLY FOR DEVELOPMENT
+  
+  app:
+    build: ./Dockerfile
+    links: 
+      - db
+    ports: 
+      - 5001:5001
+
+volumes:
+  approxWeather:
