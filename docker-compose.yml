@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.4"
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -10,13 +10,14 @@ services:
       - MSSQL_SA_PASSWORD=${MSSQL_PASSWORD}
     ports:
       - 1433:1433 # ONLY FOR DEVELOPMENT
-  
+
   app:
-    build: ./Dockerfile
-    links: 
-      - db
-    ports: 
-      - 5001:5001
+    image: approxweatherapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
 
 volumes:
   approxWeather:

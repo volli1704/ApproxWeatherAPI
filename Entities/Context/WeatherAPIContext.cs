@@ -16,7 +16,6 @@ namespace ApproxWeatherAPI.Entities
         public WeatherAPIContext(IConnectionStringBuilder DSNBuilder) : base()
         {
             this.DSNBuilder = DSNBuilder;
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
