@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace ApproxWeatherAPI
@@ -38,8 +39,11 @@ namespace ApproxWeatherAPI
             services.AddDbContext<WeatherAPIContext>();
 
             services.AddScoped<IProfilesService, ProfilesService>();
-            //services.AddScoped<IGetWeatherService, GetWeatherService>();
+            services.AddScoped<IGetWeatherService, GetWeatherService>();
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

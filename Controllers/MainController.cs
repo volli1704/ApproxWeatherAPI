@@ -18,7 +18,7 @@ namespace ApproxWeatherAPI.Controllers
         [HttpGet("/")]
         public JsonResult Index()
         {
-            return new JsonResult("");
+            return new JsonResult(service.GetForecastAsync().Result);
         }
     }
 }
